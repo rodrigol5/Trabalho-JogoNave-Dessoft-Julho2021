@@ -23,7 +23,7 @@ def game_screen(window):
     player = Ship(groups, assets)
     all_sprites.add(player)
     # Criando os meteoros
-    for i in range(8):
+    for i in range(5):
         meteor = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
@@ -54,27 +54,27 @@ def game_screen(window):
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
                     if event.key == pygame.K_LEFT:
-                        player.speedx -= 8
+                        player.speedx -= 6
                     if event.key == pygame.K_RIGHT:
-                        player.speedx += 8
+                        player.speedx += 5
                     if event.key == pygame.K_SPACE:
                         player.shoot()
                     if event.key == pygame.K_UP:
-                        player.speedy -= 8
+                        player.speedy -= 3
                     if event.key == pygame.K_DOWN:
-                        player.speedy += 8
+                        player.speedy += 3
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:
                     # Dependendo da tecla, altera a velocidade.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
-                            player.speedx += 8
+                            player.speedx += 6
                         if event.key == pygame.K_RIGHT:
-                            player.speedx -= 8
+                            player.speedx -= 5
                         if event.key == pygame.K_UP:
-                            player.speedy += 8
+                            player.speedy += 3
                         if event.key == pygame.K_DOWN:
-                            player.speedy -= 8
+                            player.speedy -= 3
         
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos meteoros

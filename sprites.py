@@ -64,22 +64,32 @@ class Meteor(pygame.sprite.Sprite):
         self.image = assets[METEOR_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-        self.rect.y = random.randint(-100, -METEOR_HEIGHT)
-        self.speedx = random.randint(-3, 3)
-        self.speedy = random.randint(2, 9)
+        self.rect.x = random.randint(WIDTH, WIDTH+METEOR_HEIGHT)
+        self.rect.y = random.randint(0, HEIGHT)    
+        self.speedy = random.randint(-2, 2)
+
+        velocidade_possibilidades = random.randint(0,10)
+        if velocidade_possibilidades <= 6:
+            self.speedx = random.randint(3, 9)
+        elif velocidade_possibilidades > 6:
+            self.speedx = random.randint(21, 37)
 
     def update(self):
         # Atualizando a posição do meteoro
-        self.rect.x += self.speedx
+        self.rect.x -= self.speedx
         self.rect.y += self.speedy
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.top > HEIGHT or self.rect.right < 0 or self.rect.left > WIDTH:
-            self.rect.x = random.randint(0, WIDTH-METEOR_WIDTH)
-            self.rect.y = random.randint(-100, -METEOR_HEIGHT)
-            self.speedx = random.randint(-3, 3)
-            self.speedy = random.randint(2, 9)
+        if self.rect.left<0 or self.rect.top<0 or self.rect.bottom>(HEIGHT+METEOR_HEIGHT) or self.rect.right>(WIDTH+METEOR_WIDTH+15):
+            self.rect.x = random.randint(WIDTH, WIDTH+METEOR_HEIGHT)
+            self.rect.y = random.randint(0, HEIGHT)
+            self.speedy = random.randint(-1, 1)
+
+            velocidade_possibilidades = random.randint(0,10)
+            if velocidade_possibilidades <= 6:
+                self.speedx = random.randint(3, 9)
+            elif velocidade_possibilidades > 6:
+                self.speedx = random.randint(21, 37)
 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
