@@ -10,6 +10,15 @@ def game_screen(window):
 
     assets = load_assets()
 
+    DONE = 0
+    PLAYING = 1
+    EXPLODING = 2
+    state = PLAYING
+
+    keys_down = {}
+    score = 0
+    lives = 3
+
     # Criando um grupo de meteoros
     all_sprites = pygame.sprite.Group()
     all_meteors = pygame.sprite.Group()
@@ -22,20 +31,13 @@ def game_screen(window):
     # Criando o jogador
     player = Ship(groups, assets)
     all_sprites.add(player)
+
     # Criando os meteoros
-    for i in range(5):
+    for i in range(3):
         meteor = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
 
-    DONE = 0
-    PLAYING = 1
-    EXPLODING = 2
-    state = PLAYING
-
-    keys_down = {}
-    score = 0
-    lives = 3
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
@@ -54,27 +56,27 @@ def game_screen(window):
                     # Dependendo da tecla, altera a velocidade.
                     keys_down[event.key] = True
                     if event.key == pygame.K_LEFT:
-                        player.speedx -= 6
+                        player.speedx -= 9
                     if event.key == pygame.K_RIGHT:
-                        player.speedx += 5
+                        player.speedx += 6
                     if event.key == pygame.K_SPACE:
                         player.shoot()
                     if event.key == pygame.K_UP:
-                        player.speedy -= 3
+                        player.speedy -= 7
                     if event.key == pygame.K_DOWN:
-                        player.speedy += 3
+                        player.speedy += 7
                 # Verifica se soltou alguma tecla.
                 if event.type == pygame.KEYUP:
                     # Dependendo da tecla, altera a velocidade.
                     if event.key in keys_down and keys_down[event.key]:
                         if event.key == pygame.K_LEFT:
-                            player.speedx += 6
+                            player.speedx += 9
                         if event.key == pygame.K_RIGHT:
-                            player.speedx -= 5
+                            player.speedx -= 3
                         if event.key == pygame.K_UP:
-                            player.speedy += 3
+                            player.speedy += 5
                         if event.key == pygame.K_DOWN:
-                            player.speedy -= 3
+                            player.speedy -= 5
         
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos meteoros

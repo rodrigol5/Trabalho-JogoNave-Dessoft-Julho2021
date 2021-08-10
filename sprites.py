@@ -1,7 +1,7 @@
 import random
 import pygame
 from config import WIDTH, HEIGHT, METEOR_WIDTH, METEOR_HEIGHT, SHIP_WIDTH, SHIP_HEIGHT
-from assets import SHIP_IMG, PEW_SOUND, METEOR_IMG, BULLET_IMG, EXPLOSION_ANIM
+from assets import SHIP_IMG, PEW_SOUND, METEOR_IMG1, METEOR_IMG2, METEOR_IMG3, BULLET_IMG, EXPLOSION_ANIM
 
 
 class Ship(pygame.sprite.Sprite):
@@ -21,7 +21,7 @@ class Ship(pygame.sprite.Sprite):
 
         # Só será possível atirar uma vez a cada 500 milissegundos
         self.last_shot = pygame.time.get_ticks()
-        self.shoot_ticks = 700
+        self.shoot_ticks = 500
 
     def update(self):
         # Atualização da posição da nave
@@ -61,7 +61,9 @@ class Meteor(pygame.sprite.Sprite):
         # Construtor da classe mãe (Sprite).
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = assets[METEOR_IMG]
+        meteoro_marrom_diferentes = [METEOR_IMG1, METEOR_IMG2, METEOR_IMG3]
+        self.image = assets[random.choice(meteoro_marrom_diferentes)]
+
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(WIDTH, WIDTH+METEOR_HEIGHT)
@@ -70,9 +72,9 @@ class Meteor(pygame.sprite.Sprite):
 
         velocidade_possibilidades = random.randint(0,10)
         if velocidade_possibilidades <= 6:
-            self.speedx = random.randint(3, 9)
+            self.speedx = random.randint(6, 9)
         elif velocidade_possibilidades > 6:
-            self.speedx = random.randint(21, 37)
+            self.speedx = random.randint(15, 25)
 
     def update(self):
         # Atualizando a posição do meteoro
@@ -87,9 +89,9 @@ class Meteor(pygame.sprite.Sprite):
 
             velocidade_possibilidades = random.randint(0,10)
             if velocidade_possibilidades <= 6:
-                self.speedx = random.randint(3, 9)
+                self.speedx = random.randint(6, 9)
             elif velocidade_possibilidades > 6:
-                self.speedx = random.randint(21, 37)
+                self.speedx = random.randint(15, 25)
 
 # Classe Bullet que representa os tiros
 class Bullet(pygame.sprite.Sprite):
@@ -105,7 +107,7 @@ class Bullet(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centery = centery
         self.rect.right = right
-        self.speedx = 5  # Velocidade fixa para cima
+        self.speedx = 16  # Velocidade fixa para cima
 
     def update(self):
         # A bala só se move no eixo y
