@@ -38,8 +38,6 @@ def game_screen(window):
         meteor = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
-        delay_meteoro = False
-
 
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
@@ -76,9 +74,9 @@ def game_screen(window):
                         if event.key == pygame.K_RIGHT:
                             player.speedx -= 6
                         if event.key == pygame.K_UP:
-                            player.speedy += 5
+                            player.speedy += 7
                         if event.key == pygame.K_DOWN:
-                            player.speedy -= 5
+                            player.speedy -= 7
         
         # ----- Atualiza estado do jogo
         # Atualizando a posição dos meteoros
@@ -101,7 +99,10 @@ def game_screen(window):
                 # Ganhou pontos!
                 score += 100
                 if score % 1000 == 0:
-                    lives += 1
+                    for i in range(2):                   
+                        meteor = Meteor(assets)
+                        all_sprites.add(meteor)
+                        all_meteors.add(meteor)
 
             # Verifica se houve colisão entre nave e meteoro
             hits = pygame.sprite.spritecollide(player, all_meteors, True, pygame.sprite.collide_mask)
