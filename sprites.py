@@ -12,7 +12,7 @@ class Ship(pygame.sprite.Sprite):
         self.image = assets[SHIP_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.centerx = 0
+        self.rect.centerx = 100
         self.rect.bottom = HEIGHT / 2
         self.speedx = 0
         self.speedy = 0
@@ -72,9 +72,9 @@ class Meteor(pygame.sprite.Sprite):
 
         velocidade_possibilidades = random.randint(0,10)
         if velocidade_possibilidades <= 6:
-            self.speedx = random.randint(6, 9)
+            self.speedx = random.randint(2, 6)
         elif velocidade_possibilidades > 6:
-            self.speedx = random.randint(15, 25)
+            self.speedx = random.randint(10, 20)
 
     def update(self):
         # Atualizando a posição do meteoro
@@ -82,7 +82,7 @@ class Meteor(pygame.sprite.Sprite):
         self.rect.y += self.speedy
         # Se o meteoro passar do final da tela, volta para cima e sorteia
         # novas posições e velocidades
-        if self.rect.left<0 or self.rect.top<0 or self.rect.bottom>(HEIGHT+METEOR_HEIGHT) or self.rect.right>(WIDTH+METEOR_WIDTH+15):
+        if self.rect.left<-METEOR_WIDTH or self.rect.top<-METEOR_HEIGHT or self.rect.bottom>(HEIGHT+METEOR_HEIGHT) or self.rect.right>(WIDTH+METEOR_WIDTH+15):
             self.rect.x = random.randint(WIDTH, WIDTH+METEOR_HEIGHT)
             self.rect.y = random.randint(0, HEIGHT)
             self.speedy = random.randint(-1, 1)

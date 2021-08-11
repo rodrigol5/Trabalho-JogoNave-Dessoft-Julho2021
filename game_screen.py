@@ -39,6 +39,12 @@ def game_screen(window):
         all_sprites.add(meteor)
         all_meteors.add(meteor)
 
+
+    x0 = 0
+    x1 = WIDTH
+    fundo = assets[BACKGROUND]
+    fundo_rect = fundo.get_rect()
+
     # ===== Loop principal =====
     pygame.mixer.music.play(loops=-1)
     while state != DONE:
@@ -127,10 +133,26 @@ def game_screen(window):
                     player = Ship(groups, assets)
                     all_sprites.add(player)
 
-        # ----- Gera saídas
-        window.fill(BLACK)  # Preenche com a cor branca
-        window.blit(assets[BACKGROUND], (0, 0))
-        
+        #Gera saídas
+        ############
+        window.fill(BLACK)  
+        window.blit(fundo, fundo_rect)
+
+        window.blit(fundo, (x0, 0))
+        window.blit(fundo, (x1, 0))
+
+
+        x0 -= 5
+        x1 -= 5
+
+        if x0 <= -WIDTH:
+            x0 = WIDTH
+            pygame.display.flip()
+        if x1 <= -WIDTH:
+            x1 = WIDTH  
+            pygame.display.flip()
+
+
         # Desenhando meteoros
         all_sprites.draw(window)       
   
