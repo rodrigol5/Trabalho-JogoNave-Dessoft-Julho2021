@@ -16,8 +16,8 @@ class Ship(pygame.sprite.Sprite):
         self.rect.bottom = HEIGHT / 2
         self.speedx = 0
         self.speedy = 0
-        self.groups = groups
         self.assets = assets
+        self.groups = groups
 
         # Só será possível atirar uma vez a cada 500 milissegundos
         self.last_shot = pygame.time.get_ticks()

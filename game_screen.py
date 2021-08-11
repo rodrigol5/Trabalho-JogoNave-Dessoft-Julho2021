@@ -32,11 +32,13 @@ def game_screen(window):
     player = Ship(groups, assets)
     all_sprites.add(player)
 
+
     # Criando os meteoros
-    for i in range(3):
+    for i in range(6):
         meteor = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
+        delay_meteoro = False
 
 
     # ===== Loop principal =====
@@ -72,7 +74,7 @@ def game_screen(window):
                         if event.key == pygame.K_LEFT:
                             player.speedx += 9
                         if event.key == pygame.K_RIGHT:
-                            player.speedx -= 3
+                            player.speedx -= 6
                         if event.key == pygame.K_UP:
                             player.speedy += 5
                         if event.key == pygame.K_DOWN:
@@ -127,9 +129,10 @@ def game_screen(window):
         # ----- Gera saídas
         window.fill(BLACK)  # Preenche com a cor branca
         window.blit(assets[BACKGROUND], (0, 0))
+        
         # Desenhando meteoros
-        all_sprites.draw(window)
-
+        all_sprites.draw(window)       
+  
         # Desenhando o score
         text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
         text_rect = text_surface.get_rect()
