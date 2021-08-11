@@ -11,5 +11,5 @@ Trabalho da matéria de Design de Software (Dessoft), Julho-Agosto 2021.
 
 5). Adicionar animação ao texto "Pressione qualquer tecla" na tela inicial (o texto deve ficar piscando ou se movimentando);
 
-
+6) Implementar fundo que se move infinitamente.
 
