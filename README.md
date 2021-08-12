@@ -18,7 +18,7 @@ Funções Avaliativas Implementadas:
 
 7) Adicionar um segundo tipo de meteoro que tira duas vidas ao invés de uma ao colidir com a nave;
 
-
+8) Adicionar item que aumenta a quantidade de vidas do jogador;
 
 ==================================;;==================================
 
