@@ -17,10 +17,15 @@ Funções Avaliativas Implementadas:
 6) Implementar fundo que se move infinitamente.
 
 7) Adicionar um segundo tipo de meteoro que tira duas vidas ao invés de uma ao colidir com a nave;
+a)Meteoro com arte diferente.
 
 8) Adicionar item que aumenta a quantidade de vidas do jogador;
+a)Adicionei som quando adquire o item.
 
 ==================================;;==================================
 
 Funções próprias implementadas:
-1) Diferentes artes para o Meteoro.
+Metoros
+a) Diferentes artes para o Meteoro.
+b) Probabilidades posições específicas de nascimento.
+c) Probabilidades para velocidades.
