@@ -63,7 +63,6 @@ class Meteor(pygame.sprite.Sprite):
 
         meteoro_marrom_diferentes = [METEOR_IMG1, METEOR_IMG2, METEOR_IMG3]
         self.image = assets[random.choice(meteoro_marrom_diferentes)]
-
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.x = random.randint(WIDTH, WIDTH+METEOR_HEIGHT)

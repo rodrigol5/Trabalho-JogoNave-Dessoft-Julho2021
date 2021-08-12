@@ -33,18 +33,17 @@ def init_screen(screen):
                 running = False
                 #Começa o jogo e sai do init_screen
 
-
         # A cada loop, redesenha o fundo e os sprites
         screen.fill(BLACK)
 
         screen.blit(background, background_rect)
         pygame.display.flip()
         time.sleep(1)
+        
         screen.blit(text, (50, 590))
         pygame.display.flip()
         time.sleep(1)
 
-        pygame.display.flip() 
     return state
 
 

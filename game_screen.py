@@ -1,4 +1,5 @@
 import pygame
+import random
 from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
 from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, SCORE_FONT
 from sprites import Ship, Meteor, Bullet, Explosion
@@ -59,7 +60,7 @@ def game_screen(window):
             if state == PLAYING:
                 # Verifica se apertou alguma tecla.
                 if event.type == pygame.KEYDOWN:
-                    # Dependendo da tecla, altera a velocidade.
+                    #Movimentação é controlada pela VELOCIDADE
                     keys_down[event.key] = True
                     if event.key == pygame.K_LEFT:
                         player.speedx -= 9
@@ -154,8 +155,8 @@ def game_screen(window):
 
 
         # Desenhando meteoros
-        all_sprites.draw(window)       
-  
+        all_sprites.draw(window) 
+
         # Desenhando o score
         text_surface = assets[SCORE_FONT].render("{:08d}".format(score), True, YELLOW)
         text_rect = text_surface.get_rect()

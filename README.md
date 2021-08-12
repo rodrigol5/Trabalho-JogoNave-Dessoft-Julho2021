@@ -1,6 +1,7 @@
 # Jogo-Nave-Dessoft-Julho-2021
 Trabalho da matéria de Design de Software (Dessoft), Julho-Agosto 2021.
 
+Funções Avaliativas Implementadas:
 1) Mudar o jogo para a horizontal (nave apontando para a direita e meteoros vindo da direita da janela);
 
 2) Permitir movimento vertical (eixo y) da nave;
@@ -13,3 +14,6 @@ Trabalho da matéria de Design de Software (Dessoft), Julho-Agosto 2021.
 
 6) Implementar fundo que se move infinitamente.
 
+
+Funções próprias implementadas:
+1) Diferentes artes para o Meteoro.
