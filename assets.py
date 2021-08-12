@@ -8,7 +8,7 @@ BACKGROUND = 'background'
 METEOR_IMG1 = 'meteor_img1'
 METEOR_IMG2 = 'meteor_img2'
 METEOR_IMG3 = 'meteor_img3'
-
+METEOR_GRAY = 'meteor_img4'
 SHIP_IMG = 'ship_img'
 SHIP_IMG = 'ship_img'
 BULLET_IMG = 'bullet_img'
@@ -24,11 +24,17 @@ def load_assets():
     assets[BACKGROUND] = pygame.image.load(os.path.join(IMG_DIR, 'starfield.png')).convert()
 
     assets[METEOR_IMG1] = pygame.image.load(os.path.join(IMG_DIR, 'meteorBrown_med1.png')).convert_alpha()
-    assets[METEOR_IMG2] = pygame.image.load(os.path.join(IMG_DIR, 'meteorBrown_med2.png')).convert_alpha()
-    assets[METEOR_IMG3] = pygame.image.load(os.path.join(IMG_DIR, 'meteorBrown_med3.png')).convert_alpha()
     assets[METEOR_IMG1] = pygame.transform.scale(assets['meteor_img1'], (METEOR_WIDTH, METEOR_HEIGHT))
+
+    assets[METEOR_IMG2] = pygame.image.load(os.path.join(IMG_DIR, 'meteorBrown_med2.png')).convert_alpha()
     assets[METEOR_IMG2] = pygame.transform.scale(assets['meteor_img2'], (METEOR_WIDTH, METEOR_HEIGHT))
+
+    assets[METEOR_IMG3] = pygame.image.load(os.path.join(IMG_DIR, 'meteoroGRAY.png')).convert_alpha()
     assets[METEOR_IMG3] = pygame.transform.scale(assets['meteor_img3'], (METEOR_WIDTH, METEOR_HEIGHT))
+
+    assets[METEOR_GRAY] = pygame.image.load(os.path.join(IMG_DIR, 'meteoroGRAY.png')).convert_alpha()  
+    assets[METEOR_GRAY] = pygame.transform.scale(assets['meteor_img4'], (METEOR_WIDTH, METEOR_HEIGHT))
+
 
     assets[SHIP_IMG] = pygame.image.load(os.path.join(IMG_DIR, 'playerShip1_orange.png')).convert_alpha()
     assets[SHIP_IMG] = pygame.transform.scale(assets['ship_img'], (SHIP_WIDTH, SHIP_HEIGHT))
