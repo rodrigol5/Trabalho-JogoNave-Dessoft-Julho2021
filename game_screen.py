@@ -1,13 +1,14 @@
 import pygame
 import random
 from config import FPS, WIDTH, HEIGHT, BLACK, YELLOW, RED
-from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, SCORE_FONT
-from sprites import Ship, Meteor, Bullet, MeteorGRAY, Explosion
+from assets import load_assets, DESTROY_SOUND, BOOM_SOUND, BACKGROUND, SCORE_FONT, ONEUP
+from sprites import Ship, Meteor, Bullet, MeteorGRAY, Explosion, item_vida
 
 
 def game_screen(window):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
+     
 
     assets = load_assets()
 
@@ -20,41 +21,48 @@ def game_screen(window):
     score = 0
     lives = 3
 
-    # Criando um grupo de meteoros
+    groups = {}
+
+    # Principais Grupos
     all_sprites = pygame.sprite.Group()
     all_bullets = pygame.sprite.Group()
     all_meteors = pygame.sprite.Group()
-
-    brown_meteors = pygame.sprite.Group()
-    gray_meteors = pygame.sprite.Group()
-
-    groups = {}
-
+    all_items = pygame.sprite.Group()
     groups['all_sprites'] = all_sprites
     groups['all_bullets'] = all_bullets
     groups['all_meteors'] = all_meteors
+    groups['all_items'] = all_items
 
+    # Grupos de Metoros
+    # Para decidir se tirar 1 ou duas vidas 
+    brown_meteors = pygame.sprite.Group()
+    gray_meteors = pygame.sprite.Group()
     groups['brown_meteors'] = brown_meteors
     groups['gray_meteors'] = gray_meteors
 
-
-    # Criando o jogador
+    # Criando o jogador.
     player = Ship(groups, assets)
     all_sprites.add(player)
 
-    for i in range(1):
+    # Criando item que +1 a vida.
+    itemvida = item_vida(assets)
+    all_sprites.add(itemvida)
+    all_items.add(itemvida)
+
+    # Criando o meteoro cinza
+    for j in range(1):
         meteor = MeteorGRAY(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
         gray_meteors.add(meteor)
-
-    # Criando os meteoros
+    # Criando os meteoros 
     for i in range(3):
         meteor = Meteor(assets)
         all_sprites.add(meteor)
         all_meteors.add(meteor)
         brown_meteors.add(meteor)
 
+    #Variáveis para movimentar o fundo
     x0 = 0
     x1 = WIDTH
     fundo = assets[BACKGROUND]
@@ -109,15 +117,13 @@ def game_screen(window):
             for meteor in hits: # As chaves são os elementos do primeiro grupo (meteoros) que colidiram com alguma bala
                 # O meteoro e destruido e precisa ser recriado
                 assets[DESTROY_SOUND].play()
-
                 novo_meteoro_prob = random.randint(0,10)
-                if novo_meteoro_prob <= 7:
+                if novo_meteoro_prob <= 8:
                     meteor = Meteor(assets)
                     all_sprites.add(meteor)
                     all_meteors.add(meteor)
                     brown_meteors.add(meteor)
-
-                elif novo_meteoro_prob > 7:
+                elif novo_meteoro_prob > 8:
                     meteor = MeteorGRAY(assets)
                     all_sprites.add(meteor)
                     all_meteors.add(meteor)
@@ -127,15 +133,17 @@ def game_screen(window):
                 explosao = Explosion(meteor.rect.center, assets)
                 all_sprites.add(explosao)
 
-                # Ganhou pontos!
+                #SCORE
                 score += 200
+
+                #MARCADORES DE SCORE.
+                #PARA 1000 e 3000 ADICIONA MAIS METEOROS.
                 if score % 1000 == 0:
                     for i in range(1):                   
                         meteor = Meteor(assets)
                         all_sprites.add(meteor)
                         all_meteors.add(meteor)
                         brown_meteors.add(meteor)
-
                 if score % 3000 == 0:
                     for i in range(1):                   
                         meteor = MeteorGRAY(assets)
@@ -156,7 +164,7 @@ def game_screen(window):
                 keys_down = {}
                 explosion_tick = pygame.time.get_ticks()
                 explosion_duration = explosao.frame_ticks * len(explosao.explosion_anim) + 400
-              # Verifica se houve colisão entre nave e meteoro
+            # Verifica se houve colisão entre nave e meteoro
             hits = pygame.sprite.spritecollide(player, gray_meteors, True, pygame.sprite.collide_mask)
             if len(hits) > 0:
                 # Toca o som da colisão
@@ -169,6 +177,16 @@ def game_screen(window):
                 keys_down = {}
                 explosion_tick = pygame.time.get_ticks()
                 explosion_duration = explosao.frame_ticks * len(explosao.explosion_anim) + 400
+            # Verifica se houve colisão entre item_vida e meteoro
+            hits = pygame.sprite.spritecollide(player, all_items, True, pygame.sprite.collide_mask)
+            if len(hits) > 0:
+                # Toca o som quando pega o item
+                assets[ONEUP].play()
+                lives += 1
+                pygame.display.flip()
+                itemvida = item_vida(assets)
+                all_sprites.add(itemvida)
+                all_items.add(itemvida)
 
         elif state == EXPLODING:
             now = pygame.time.get_ticks()
@@ -188,7 +206,7 @@ def game_screen(window):
         window.blit(fundo, (x0, 0))
         window.blit(fundo, (x1, 0))
 
-
+        #Fundo Infinito.
         x0 -= 5
         x1 -= 5
 
