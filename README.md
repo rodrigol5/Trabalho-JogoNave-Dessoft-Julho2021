@@ -16,6 +16,10 @@ Funções Avaliativas Implementadas:
 
 6) Implementar fundo que se move infinitamente.
 
+7) Adicionar um segundo tipo de meteoro que tira duas vidas ao invés de uma ao colidir com a nave;
+
+
+
 ==================================;;==================================
 
 Funções próprias implementadas:
